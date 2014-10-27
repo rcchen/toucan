@@ -1,0 +1,37 @@
+// Wrapper for Devise controllers
+#sessions-controller {
+
+    background-color: #ECECEC;
+
+    #login-container {
+        background-color: #fbfbf9;
+        margin: 70px auto;
+        padding: 20px;
+        width: 350px;
+        #login-google {
+            background-color: #5677FC;
+            color: #FFFFFF;
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            text-align: center;
+            width: 310px;
+            &:hover {
+                background-color: #4E6CEF;
+                text-decoration: none;
+            }
+            i {
+                font-size: 20px;
+                vertical-align: middle;
+            }
+            span {
+                margin-left: 10px;
+            }
+        }
+        p {
+            line-height: 22px;
+            margin-bottom: 20px;
+        }
+    }
+
+}

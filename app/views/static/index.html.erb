@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+    <p><%= current_user.name %> (<%= current_user.email %>)</p>
+    <%= button_to('Logout', destroy_user_session_path, :method => :delete) %>
+<% else %>
+    <%= button_to('Login', new_user_session_path) %>
+<% end %>

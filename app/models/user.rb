@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
         # Creates user if it does not exist
         unless user
             user = User.create(name: data["name"], 
-                    email: data["email"], 
+                    email: data["email"],
                     password: Devise.friendly_token[0, 20])
         end
 

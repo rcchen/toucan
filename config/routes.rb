@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
+  
+  get 'rails/s'
+
+  # Handle authentication with Devise  
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  # Fallback for static URLs
+  root 'static#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
