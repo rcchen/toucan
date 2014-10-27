@@ -1,30 +1,52 @@
-<% if user_signed_in? %>
-    <p><%= current_user.name %> (<%= current_user.email %>)</p>
-    <p><%= image_tag current_user.gravatar_url %></p>
-    <%= button_to('Logout', destroy_user_session_path, :method => :delete) %>
-<% else %>
-    <%= button_to('Login', new_user_session_path) %>
-<% end %>
+<div id="toucan-container">
+    <div id="sidebar">
+        <div class="sidebar-icon"><span class="glyphicon glyphicon-home"></span></div>
+        <div class="sidebar-icon"><span class="glyphicon glyphicon-inbox"></span></div>
+        <div class="sidebar-icon"><span class="glyphicon glyphicon-cog"></span></div>
+    </div>
+    <div id="content">
+        <div class="card">
+            <div class="card-title">Assignments (Created)</div>
+            <div class="card-content">
+                <% current_user.created_tasks.each do |created_task| %>
+                    <li><%= created_task.title %></li>
+                <% end %>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">Assignments (Responsible)</div>
+            <div class="card-content">
+                <% current_user.assigned_tasks.each do |assigned_task| %>
+                    <li><%= assigned_task.title %></li>
+                <% end %>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">Assignments (Unassigned)</div>
+            <div class="card-content">
+                <% Assignment.where(:status => "Unassigned").each do |assignment| %>
+                    <li><%= assignment.title %></li>
+                <% end %>
+            </div>
+        </div>
+        <% if user_signed_in? %>
+            <p><%= current_user.name %> (<%= current_user.email %>)</p>
+            <p><%= image_tag current_user.gravatar_url %></p>
+            <%= button_to('Logout', destroy_user_session_path, :method => :delete) %>
+        <% else %>
+            <%= button_to('Login', new_user_session_path) %>
+        <% end %>
 
-<%= form_for @assignment, url: {controller: "assignments", action: "create"} do |f| %>
-    <%= f.text_field :title %>
-    <%= f.select(:category, [['Arts and Life', 'Arts and Life'],['Sports', 'Sports'],['News', 'News']]) %>
-    <%= f.datetime_local_field :start_time %>
-    <%= f.text_field :description %>
-    <%= f.submit "Create" %>
-<% end %>
+        <%= form_for @assignment, url: {controller: "assignments", action: "create"} do |f| %>
+            <%= f.text_field :title %>
+            <%= f.select(:category, [['Arts and Life', 'Arts and Life'],['Sports', 'Sports'],['News', 'News']]) %>
+            <%= f.datetime_local_field :start_time %>
+            <%= f.text_field :description %>
+            <%= f.submit "Create" %>
+        <% end %>
 
-<h3>Assignments (Created)</h3>
-<% current_user.created_tasks.each do |created_task| %>
-    <li><%= created_task.title %></li>
-<% end %>
 
-<h3>Assignments (Responsible)</h3>
-<% current_user.assigned_tasks.each do |assigned_task| %>
-    <li><%= assigned_task.title %></li>
-<% end %>
+    </div>
+</div>
 
-<h3>Open Assignments</h3>
-<% Assignment.where(:status => "Unassigned").each do |assignment| %>
-    <li><%= assignment.title %></li>
-<% end %>
+

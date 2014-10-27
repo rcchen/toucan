@@ -1,6 +1,6 @@
 require 'digest/md5'
 
-class StaticController < ActionController::Base
+class StaticController < ApplicationController
     before_action :authenticate_user!
 
     def index

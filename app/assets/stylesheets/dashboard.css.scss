@@ -1,0 +1,55 @@
+html, body {
+    height: 100%;
+}
+
+#toucan-container {
+    height: 100%;
+    position: relative;
+}
+
+$sidebar-bg-color: #5677fc;
+
+#sidebar {
+    background-color: $sidebar-bg-color;
+    float: left;
+    height: 100%;
+    overflow: auto;
+    width: 80px;
+    .sidebar-icon {
+        background-color: $sidebar-bg-color;
+        color: #FAFAFA;
+        font-size: 30px;
+        padding: 15px 0px;
+        text-align: center;
+        width: 80px;
+        span {
+            padding-right: 3px;
+        }
+        &:hover {
+            background-color: #738ffe;
+            color: #FAFAFA;
+        }
+    }
+}
+
+#content {
+    background: url('background.png');
+    height: 100%;
+    overflow: auto;
+    padding: 15px 20px;
+    width: auto;
+    .card {
+        background-color: white;
+        margin-bottom: 20px;
+        width: 300px;
+        .card-title {
+            background-color: $sidebar-bg-color;
+            color: white;
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+        .card-content {
+            padding: 5px 10px;
+        }
+    }
+}
