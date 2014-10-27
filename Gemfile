@@ -47,3 +47,6 @@ gem "omniauth-google-oauth2"
 # Use Bootstrap for things
 gem 'rails-assets-bootstrap'
 gem 'rails-assets-fontawesome'
+
+# Gravatars for avatars
+gem 'gravtastic'

@@ -1,25 +1,7 @@
 <div id="login-container">
-    <!-- <h2>Log in</h2>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div><%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true %></div>
-
-      <div><%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "off" %></div>
-
-      <% if devise_mapping.rememberable? -%>
-        <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-      <% end -%>
-
-      <div><%= f.submit "Log in" %></div>
-    <% end %> -->
-    <p>This application currently authenticates you with your <strong>Stanford</strong> Google account, so please select that account when signing into the system.</p>
-
+    <p><strong>Notice:</strong> if you have multiple Google accounts, please be consistent in the account that you use to access this application.</p>
     <a id="login-google" href="/users/auth/google_oauth2">
         <i class="fa fa-google"></i>
         <span>Sign in with Google</span>
     </a>
-
-
-    <!-- <%= render "devise/shared/links" %> -->
 </div>
