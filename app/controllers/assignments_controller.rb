@@ -12,7 +12,7 @@ class AssignmentsController < ApplicationController
     end
 
     def update
-
+        
     end
 
     def destroy

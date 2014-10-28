@@ -1,52 +1,91 @@
 <div id="toucan-container">
     <div id="sidebar">
         <div class="sidebar-icon"><span class="glyphicon glyphicon-home"></span></div>
-        <div class="sidebar-icon"><span class="glyphicon glyphicon-inbox"></span></div>
         <div class="sidebar-icon"><span class="glyphicon glyphicon-cog"></span></div>
     </div>
     <div id="content">
-        <div class="card">
-            <div class="card-title">Assignments (Created)</div>
-            <div class="card-content">
-                <% current_user.created_tasks.each do |created_task| %>
-                    <li><%= created_task.title %></li>
-                <% end %>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-title">Assignments (Responsible)</div>
-            <div class="card-content">
-                <% current_user.assigned_tasks.each do |assigned_task| %>
-                    <li><%= assigned_task.title %></li>
-                <% end %>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-title">Assignments (Unassigned)</div>
-            <div class="card-content">
-                <% Assignment.where(:status => "Unassigned").each do |assignment| %>
-                    <li><%= assignment.title %></li>
-                <% end %>
-            </div>
-        </div>
-        <% if user_signed_in? %>
-            <p><%= current_user.name %> (<%= current_user.email %>)</p>
-            <p><%= image_tag current_user.gravatar_url %></p>
-            <%= button_to('Logout', destroy_user_session_path, :method => :delete) %>
-        <% else %>
-            <%= button_to('Login', new_user_session_path) %>
-        <% end %>
 
-        <%= form_for @assignment, url: {controller: "assignments", action: "create"} do |f| %>
-            <%= f.text_field :title %>
-            <%= f.select(:category, [['Arts and Life', 'Arts and Life'],['Sports', 'Sports'],['News', 'News']]) %>
-            <%= f.datetime_local_field :start_time %>
-            <%= f.text_field :description %>
-            <%= f.submit "Create" %>
-        <% end %>
+        <div id="actions">
 
+            <div class="card">
+                <div class="card-title">Me</div>
+                <div class="card-content">
+                    <% if user_signed_in? %>
+                        <p><%= current_user.name %> (<%= current_user.email %>)</p>
+                        <p><%= image_tag current_user.gravatar_url %></p>
+                        <%= button_to 'Logout', destroy_user_session_path, :method => :delete, class: "btn btn-primary" %>
+                    <% else %>
+                        <%= button_to 'Login', new_user_session_path  %>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Add New Assignment</div>
+                <div class="card-content">
+                <%= form_for @assignment, url: {controller: "assignments", action: "create"}, class: "form-horizontal", role: "form" do |f| %>
+                    <h5>Title</h5>
+                    <%= f.text_field :title, class: "form-control" %>
+                    <h5>Category</h5>
+                    <%= f.select(:category, [['Arts and Life', 'Arts and Life'],['Sports', 'Sports'],['News', 'News']], {}, class: "form-control") %>
+                    <h5>Start Time</h5>
+                    <%= f.text_field :start_time, class: "form-control" %>
+                    <h5>Description</h5>
+                    <%= f.text_area :description, class: "form-control", rows: 3 %>
+                    <%= f.button "Create", class: "btn btn-primary" %>
+                <% end %>
+                </div>
+                </h3>
+            </div>
+
+        </div>
+
+        <div id="results">
+
+            <div class="card">
+                <div class="card-title">Assignments (Created)</div>
+                <div class="card-content">
+                    <% current_user.created_tasks.each do |created_task| %>
+                    <div class="task">
+                        <div class="task-title"><%= created_task.title %></div>
+                        <div class="task-metadata">
+                            <span>Starts at <%= created_task.start_time %></span> |
+                            <span>Unassigned</span>
+                        </div>
+                        <div class="task-description"><%= created_task.description %></div>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">Assignments (Responsible)</div>
+                <div class="card-content">
+                    <% current_user.assigned_tasks.each do |assigned_task| %>
+                        <li><%= assigned_task.title %></li>
+                    <% end %>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">Assignments (Unassigned)</div>
+                <div class="card-content">
+                    <% Assignment.where(:status => "Unassigned").each do |assignment| %>
+                    <div class="task">
+                        <div class="task-title"><%= assignment.title %></div>
+                        <div class="task-metadata">
+                            <span>Starts at <%= assignment.start_time %></span> |
+                            <span><a href="#">Sign up</a></span>
+                        </div>
+                        <div class="task-description"><%= assignment.description %></div>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 </div>
 
-
+<script>
+    $('#assignment_start_time').datetimepicker();
+</script>
