@@ -13,9 +13,13 @@
 
 ActiveRecord::Schema.define(version: 20141027095942) do
 
+  create_table "assignee_assigned_tasks", id: false, force: true do |t|
+    t.integer "user_id"
+    t.integer "assignment_id"
+  end
+
   create_table "assignments", force: true do |t|
     t.integer  "assigner_id"
-    t.integer  "assignee_id"
     t.string   "title"
     t.string   "category"
     t.datetime "start_time"

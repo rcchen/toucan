@@ -19,6 +19,15 @@ class AssignmentsController < ApplicationController
 
     end
 
+    def signup
+        assignment = Assignment.find(params[:id])
+        unless assignment.assignees.include?(current_user)
+            assignment.assignees << current_user
+            assignment.status = "Assigned"
+            assignment.save
+        end
+    end
+
     private
 
     def assignment_params

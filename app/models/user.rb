@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
     gravtastic
 
     has_many :created_tasks, class_name: 'Assignment', foreign_key: "assigner_id"
-    has_many :assigned_tasks, class_name: 'Assignment', foreign_key: "assignee_id"
+    has_and_belongs_to_many :assigned_tasks, class_name: 'Assignment', join_table: 'assignee_assigned_tasks'
 
     # Handles logging in a user with Google OAuth or creating
     # the user if they do not exist in the system.

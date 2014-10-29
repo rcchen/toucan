@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   put '/assignments/:id' => 'assignments#update'
   delete '/assignments/:id' => 'assignments#delete'
 
+  # Signing up for an assignment
+  get '/assignments/:id/signup' => 'assignments#signup'
+
   # Static index
   root 'static#index'
 

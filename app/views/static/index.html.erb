@@ -50,7 +50,8 @@
                         <div class="task-title"><%= created_task.title %></div>
                         <div class="task-metadata">
                             <span>Starts at <%= created_task.start_time %></span> |
-                            <span>Unassigned</span>
+                            <span>Assigned by <%= created_task.assigner.name %></span> |
+                            <span><a href="/assignments/<%= created_task.id %>/signup">Sign up</a> (<%= created_task.assignees.map { |assignee| assignee.name }.join(",") %>)</span>
                         </div>
                         <div class="task-description"><%= created_task.description %></div>
                     </div>
@@ -61,7 +62,15 @@
                 <div class="card-title">Assignments (Responsible)</div>
                 <div class="card-content">
                     <% current_user.assigned_tasks.each do |assigned_task| %>
-                        <li><%= assigned_task.title %></li>
+                    <div class="task">
+                        <div class="task-title"><%= assigned_task.title %></div>
+                        <div class="task-metadata">
+                            <span>Starts at <%= assigned_task.start_time %></span> |
+                            <span>Assigned by <%= assigned_task.assigner.name %></span> |
+                            <span><a href="/assignments/<%= assigned_task.id %>/signup">Sign up</a> (<%= assigned_task.assignees.map { |assignee| assignee.name }.join(",") %>)</span>
+                        </div>
+                        <div class="task-description"><%= assigned_task.description %></div>
+                    </div>
                     <% end %>
                 </div>
             </div>
@@ -73,7 +82,7 @@
                         <div class="task-title"><%= assignment.title %></div>
                         <div class="task-metadata">
                             <span>Starts at <%= assignment.start_time %></span> |
-                            <span><a href="#">Sign up</a></span>
+                            <span><a href="/assignments/<%= assignment.id %>/signup">Sign up</a></span>
                         </div>
                         <div class="task-description"><%= assignment.description %></div>
                     </div>
